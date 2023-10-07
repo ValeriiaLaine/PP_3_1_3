@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify user</title>
+</head>
+<body>
+    <form th:method="PATCH" th:action="@{/admin/update/{id}(id=${user.id})}" th:object="${user}">
+        <input type="hidden" name="_method" value="PATCH" />
+        <div class="main block">
+            <h2>Modify or correct data</h2>
+            <div class="field">
+                <label for="username">username</label>
+                <input type="text" th:field="*{username}" id="username"/>
+            </div>
+            <div class="field">
+                <label for="password">password</label>
+                <input type="text" th:field="*{password}" id="password"/>
+            </div>
+            <div class="field">
+                <label>Roles:
+                    <input type="checkbox" name="roles"
+                        th:each="role: ${userRoles}"
+                        th:text="${role.getRole()}"
+                        th:value="${role.getId()}"
+                        th:field="*{roles}"/>
+                </label>
+            </div>
+            <br/>
+            <hr/>
+            <input type="submit" value="Modify or correct"/>
+        </div>
+    </form>
+</body>
+</html>
