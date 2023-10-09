@@ -1,13 +1,14 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import javax.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -49,7 +50,11 @@ public class AdminConroller {
     }
 
     @PatchMapping("/update/{id}")
-    public String updateUser(@ModelAttribute("user") User updateUser, @PathVariable("id") Long id) {
+    public String updateUser(@ModelAttribute("user") @Valid User updateUser, @PathVariable("id") Long id,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/modify";
+        }
         userService.updateUser(updateUser, id);
         return "redirect:/admin";
     }
@@ -69,7 +74,11 @@ public class AdminConroller {
     }
 
     @PostMapping("/create")
-    public String saveNewUser(@ModelAttribute("user") User user) {
+    public String saveNewUser(@ModelAttribute("user") @Valid User user,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/form_for_create";
+        }
         userService.saveUser(user);
         return "redirect:/admin";
     }

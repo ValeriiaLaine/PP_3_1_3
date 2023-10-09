@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,9 +20,13 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "username")
+    @NotNull
+    @Size(min = 3,max = 20, message = "Your username is too short or too long, it must contain at least 3 symbols and not exceed 20 symbols")
     private String username;
 
     @Column(name = "password")
+    @NotNull
+    @Size(min = 4, message = "Your password is too short, it must contain at least 4 symbols")
     private String password;
 
     @ManyToMany(cascade = CascadeType.MERGE)

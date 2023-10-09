@@ -12,10 +12,12 @@
             <div class="field">
                 <label for="username">username</label>
                 <input type="text" th:field="*{username}" id="username"/>
+                <div style="color:crimson" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Error</div>
             </div>
             <div class="field">
                 <label for="password">password</label>
                 <input type="text" th:field="*{password}" id="password"/>
+                <div style="color:crimson" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Error</div>
             </div>
             <div class="field">
                 <label>Roles:
