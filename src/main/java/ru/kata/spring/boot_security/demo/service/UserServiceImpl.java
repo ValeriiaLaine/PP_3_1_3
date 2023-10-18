@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,7 +49,8 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User updateUser, Long id) {
         User user = userRepository.findById(id).get();
         user.setUsername(updateUser.getUsername());
-        user.setRoles((List<Role>) updateUser.getAuthorities());
+        Set<Role> roleSet = (Set<Role>) updateUser.getAuthorities();
+        user.setRoles(roleSet);
         if(!user.getPassword().equals(updateUser.getPassword())) {
             user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
         }

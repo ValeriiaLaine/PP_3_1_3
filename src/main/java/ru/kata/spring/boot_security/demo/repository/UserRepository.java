@@ -5,10 +5,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-@EnableJpaRepositories
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository  {
     Optional<User> findByUsername(String username);
+    <S extends User> S save(S entity);
+    Optional<User> findById(Long aLong);
+    List<User> findAll();
+    void deleteById(Long aLong);
 }
