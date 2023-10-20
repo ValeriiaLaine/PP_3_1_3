@@ -19,7 +19,7 @@
                 <input type="text" th:field="*{password}" id="password"/>
                 <div style="color:crimson" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Error</div>
             </div>
-
+            <div class="field">
                 <li th:each="role : ${userRoles}">
 
                 <select hidden th:field="*{roles[__${roleStat.index}__].id}">
@@ -35,8 +35,8 @@
                        th:value="${role}">
 
                 <label th:text="${role.role}"></label>
-            </li>
-
+                </li>
+            </div>
             <br/>
             <hr/>
             <input type="submit" value="Modify or correct"/>

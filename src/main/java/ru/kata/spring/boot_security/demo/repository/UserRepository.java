@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository  {
     Optional<User> findByUsername(String username);
-    <S extends User> S save(S entity);
+    void save(User user);
     Optional<User> findById(Long aLong);
     List<User> findAll();
     void deleteById(Long aLong);

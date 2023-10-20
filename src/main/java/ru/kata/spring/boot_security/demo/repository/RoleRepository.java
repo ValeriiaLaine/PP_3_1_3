@@ -8,6 +8,6 @@ import java.util.*;
 @Repository
 public interface RoleRepository {
     List<Role> findAll();
-    <S extends Role> S save(S entity);
+
     void delete(Role entity);
 }

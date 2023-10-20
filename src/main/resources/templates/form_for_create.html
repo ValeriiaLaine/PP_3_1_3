@@ -15,14 +15,24 @@
         <div style="color:crimson" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Error</div>
         <br/>
         <hr/>
-        <label for="role">Choose your role:
-            <select multiple="multiple" th:field="*{roles}" id="role">
-                <option th:each="role: ${roles}"
-                        th:value="${role.id}"
-                        th:text="${role.role}">
-                </option>
-            </select>
-        </label>
+        <div class="field">
+            <li th:each="role : ${roles}">
+
+                <select hidden th:field="*{roles[__${roleStat.index}__].id}">
+                    <option th:value="${role.id}"></option>
+                </select>
+
+                <select hidden th:field="*{roles[__${roleStat.index}__].role}">
+                    <option th:value="${role.role}"></option>
+                </select>
+
+                <input type="checkbox"
+                       th:field="*{roles[__${roleStat.index}__]}"
+                       th:value="${role}">
+
+                <label th:text="${role.role}"></label>
+            </li>
+        </div>
         <br/>
         <hr/>
         <input type="submit" value="Create"/>

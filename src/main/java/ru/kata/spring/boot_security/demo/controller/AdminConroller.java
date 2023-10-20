@@ -79,7 +79,8 @@ public class AdminConroller {
         if (bindingResult.hasErrors()) {
             return "/form_for_create";
         }
-        userService.saveUser(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 }

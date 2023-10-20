@@ -14,9 +14,8 @@ public class UserRepositoryImpl implements UserRepository {
     @PersistenceContext
     EntityManager entityManager;
     @Override
-    public <S extends User> S save(S entity) {
-        entityManager.persist(entity);
-        return entity;
+    public void save(User user) {
+        entityManager.persist(user);
     }
 
     @Override
