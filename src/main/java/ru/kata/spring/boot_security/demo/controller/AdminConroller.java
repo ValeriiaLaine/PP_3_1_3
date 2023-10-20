@@ -50,12 +50,12 @@ public class AdminConroller {
     }
 
     @PatchMapping("/update/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User updateUser, @PathVariable("id") Long id,
+    public String updateUser(@ModelAttribute("user") @Valid User updateUser,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/modify";
         }
-        userService.updateUser(updateUser, id);
+        userService.updateUser(updateUser);
         return "redirect:/admin";
     }
 

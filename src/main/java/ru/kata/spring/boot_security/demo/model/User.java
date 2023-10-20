@@ -13,6 +13,7 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,6 +44,10 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public Long getId() {
         return id;

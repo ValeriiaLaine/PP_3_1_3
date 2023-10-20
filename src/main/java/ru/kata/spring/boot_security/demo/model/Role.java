@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,6 +40,11 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getRole();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     @Override
     public String toString() {

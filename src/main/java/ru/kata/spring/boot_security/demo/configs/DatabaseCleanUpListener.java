@@ -14,9 +14,8 @@ public class DatabaseCleanUpListener implements ApplicationListener<ContextClose
 
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
-        jdbcTemplate.execute("DROP TABLE user_role");
-        jdbcTemplate.execute("DROP TABLE users");
-        jdbcTemplate.execute("DROP TABLE roles");
+        jdbcTemplate.execute("DROP DATABASE flyway_demo_db");
+        jdbcTemplate.execute("CREATE DATABASE flyway_demo_db");
     }
 
 }

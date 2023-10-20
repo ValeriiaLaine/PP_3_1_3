@@ -15,4 +15,6 @@ public interface UserRepository  {
     Optional<User> findById(Long aLong);
     List<User> findAll();
     void deleteById(Long aLong);
+
+    void update(User user);
 }

@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -16,7 +15,7 @@ public class UserRepositoryImpl implements UserRepository {
     EntityManager entityManager;
     @Override
     public <S extends User> S save(S entity) {
-        entityManager.merge(entity);
+        entityManager.persist(entity);
         return entity;
     }
 
@@ -44,5 +43,10 @@ public class UserRepositoryImpl implements UserRepository {
                 .getResultList()
                 .stream()
                 .findFirst();
+    }
+
+    @Override
+    public void update(User user) {
+        entityManager.merge(user);
     }
 }

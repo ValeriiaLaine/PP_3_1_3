@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,16 +47,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User updateUser, Long id) {
-        User user = userRepository.findById(id).get();
-        user.setUsername(updateUser.getUsername());
-        Set<Role> roleSet = (Set<Role>) updateUser.getAuthorities();
-        user.setRoles(roleSet);
-        if(!user.getPassword().equals(updateUser.getPassword())) {
-            user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-        }
-        userRepository.save(user);
+    public void updateUser(User user) {
+        userRepository.update(user);
     }
+
 
     @Override
     @Transactional
