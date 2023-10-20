@@ -19,15 +19,24 @@
                 <input type="text" th:field="*{password}" id="password"/>
                 <div style="color:crimson" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Error</div>
             </div>
-            <div class="field">
-                <label>Roles:
-                    <input type="checkbox" name="roles"
-                        th:each="role: ${userRoles}"
-                        th:text="${role.getRole()}"
-                        th:value="${role.getId()}"
-                        th:field="*{roles}"/>
-                </label>
-            </div>
+
+                <li th:each="role : ${userRoles}">
+
+                <select hidden th:field="*{roles[__${roleStat.index}__].id}">
+                    <option th:value="${role.id}"></option>
+                </select>
+
+                <select hidden th:field="*{roles[__${roleStat.index}__].role}">
+                    <option th:value="${role.role}"></option>
+                </select>
+
+                <input type="checkbox"
+                       th:field="*{roles[__${roleStat.index}__]}"
+                       th:value="${role}">
+
+                <label th:text="${role.role}"></label>
+            </li>
+
             <br/>
             <hr/>
             <input type="submit" value="Modify or correct"/>
